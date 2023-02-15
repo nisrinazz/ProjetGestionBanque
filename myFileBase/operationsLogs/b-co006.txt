@@ -1,0 +1,5 @@
+DATE			TIME			TYPE			MESSAGE
+2023-02-15			14:32:52.748509500			CREATION			Compte b-co006 nouvellement crée avec un solde initiale de 100.0 DH
+2023-02-15			14:33:37.293487300			VERSEMENT			Montant 18999DH versé en votre faveur
+2023-02-15			14:34:08.588899			RETRAIT			Montant 100DH retiré de votre compte
+2023-02-15			14:34:39.190450600			VIREMENT			Virement d'un montant de 100DH versé à partir de votre compte en faveur du compte b-co006

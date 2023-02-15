@@ -1,0 +1,2 @@
+DATE			TIME			TYPE			MESSAGE
+2023-02-13			15:16:33.122145			CREATION			Compteb-co001 nouvellement crée avec un solde initiale de 12344.0DH

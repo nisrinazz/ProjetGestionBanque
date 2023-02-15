@@ -1,0 +1,4 @@
+DATE			TIME			TYPE			MESSAGE
+2023-02-14			08:45:02.311510900			CREATION			Compteb-co005 nouvellement crée avec un solde initiale de 5000.0DH
+2023-02-15			14:28:21.318945500			VIREMENT			Virement d'un montant de 200DH versé en votre faveur à partir du compte b-co005
+2023-02-15			14:34:39.190450600			VIREMENT			Virement d'un montant de 100DH versé en votre faveur à partir du compte b-co005

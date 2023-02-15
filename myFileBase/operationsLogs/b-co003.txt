@@ -1,0 +1,5 @@
+DATE			TIME			TYPE			MESSAGE
+2023-02-13			15:53:13.036496			CREATION			Compteb-co003 nouvellement crée avec un solde initiale de 12334.0DH
+2023-02-15			13:57:16.705232600			RETRAIT			Montant 200DH retiré de votre compte
+2023-02-15			13:57:24.848946800			VERSEMENT			Montant 1222DH versé en votre faveur
+2023-02-15			14:28:21.317920600			VIREMENT			Virement d'un montant de 200DH versé à partir de votre compte en faveur du compte b-co003
