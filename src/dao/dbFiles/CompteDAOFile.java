@@ -129,7 +129,7 @@ public class CompteDAOFile implements ICompteDAO {
             else return compte ;
         }).collect(Collectors.toList());
         FileBasePaths.changeFile(FileBasePaths.ACCOUNT_TABLE,FileBasePaths.ACCOUNT_TABLE_HEADER);
-        saveAll(comptes);
+        saveAllWithIds(comptes);
         return newCompte;
     }
 
@@ -162,7 +162,8 @@ public class CompteDAOFile implements ICompteDAO {
        return comptes.stream().filter(compte ->
            compte.getNumeroCompte().equals(keyword) ||
            compte.getPropriétaire().getNom().contains(keyword) ||
-           compte.getPropriétaire().getPrenom().contains(keyword)
+           compte.getPropriétaire().getPrenom().contains(keyword) ||
+           compte.getPropriétaire().getNomComplet().contains(keyword)
         ).collect(Collectors.toList());
     }
 

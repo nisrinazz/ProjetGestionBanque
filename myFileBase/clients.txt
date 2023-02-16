@@ -1,5 +1,5 @@
 ID			NOM			PRENOM			LOGIN			MOT DE PASSE			CIN			EMAIL			TELEPHONE			SEXE
-7			hiba	kziber		hiba_hr		1234		xa12342			hibahr@gmail.com	12345		FEMME		NULL
-8			khadija	mchrafi		khadi		1234		44FF			khadija@gmail.	06544		FEMME		NULL
-9			nnnn			nnnnn			nnnn			nnnn			CSC233			wwwww@gjfkd.com			12455			FEMME
-10			WWWW			WWWW			WWWW			WWWW			WX123			WWW@WSDFQDF			12344			HOMME
+1			AZZAIM	NISRIN		NISRINEAZZ		NISRINE		XA1244			azzaimnisrine@gmail.com	12345		FEMME
+2			doe	john		JohnDoe		1234		WX1233			johndoe@gmail.com	123443		HOMME
+3			Dupond	patrick		patrickD		1234		CCC345			patrick@gmail.com	06543		HOMME
+4			CLIENT			CLIENT			CLIENT			1234			WA234			client@gmail.com			12344			FEMME

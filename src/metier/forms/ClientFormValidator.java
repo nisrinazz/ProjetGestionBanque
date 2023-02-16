@@ -160,15 +160,10 @@ public class ClientFormValidator implements Verifiable {
         }
        else throw new FormException("Le champ mot de passe est obligatoire");
     }
-    /*
-  //Utilisé avant avec la console
+
     public void verifierSexe(String sexe) throws  FormException{
-       if(sexe != null && sexe.trim().length()!=0){
-          if(!sexe.equalsIgnoreCase("F") && !sexe.equalsIgnoreCase("H")){
-              throw new FormException("Sexe doit etre F / H");
-          }
-       }
-      else throw new FormException("Le champ sexe est obligatoire !");
+       if(sexe == null || sexe.trim().length()==0)
+             throw new FormException("Le champ sexe est obligatoire !");
     }
 
     public void validerSexe(String sexe){
@@ -178,7 +173,7 @@ public class ClientFormValidator implements Verifiable {
            Errors().put(FIELD_SEXE,e.getMessage());
         }
     }
-*/
+
 
     public void validerNom(String nom){
         try {
@@ -250,7 +245,7 @@ public class ClientFormValidator implements Verifiable {
        validerLogin(login);
        validerMdp(mdp);
        validerTel(tel);
-     //  validerSexe(sexe);
+       validerSexe(sexe);
        if(Errors().isEmpty()){
            Client c;
            if(sexe.equalsIgnoreCase("FEMME"))

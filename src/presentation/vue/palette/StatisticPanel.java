@@ -1,5 +1,6 @@
 package presentation.vue.palette;
 
+import metier.admin.IServiceAdmin;
 import metier.admin.ServiceAdmin;
 import presentation.modele.TableauDeBord;
 
@@ -19,11 +20,12 @@ public class StatisticPanel extends JPanel {
   private   StatElement totalEntreePanel;
    private StatElement opAujPanel;
 
+   IServiceAdmin serviceAdmin ;
+
    Font fontTitle = new Font("Verdana",Font.BOLD,25);
    Font fontInfo = new Font("Verdana",Font.CENTER_BASELINE,21);
 
    public void initStatData(){
-       ServiceAdmin serviceAdmin = new ServiceAdmin();
        TableauDeBord tableauDeBord = serviceAdmin.calculerEtAfficherStatistiques();
        String nbrClient = tableauDeBord.getNombreTotaleClient().toString();
        String nbrCompte = tableauDeBord.getNombreTotaleCompte().toString();
@@ -58,7 +60,8 @@ public class StatisticPanel extends JPanel {
        initStatData();
    }
 
-   public StatisticPanel(){
+   public StatisticPanel(IServiceAdmin serviceAdmin){
+       this.serviceAdmin = serviceAdmin;
        initPanels();
        GridLayout layout = new GridLayout(3,3);
        layout.setHgap(20);

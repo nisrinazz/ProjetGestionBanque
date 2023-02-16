@@ -11,6 +11,7 @@ public class ClientForm extends JPanel {
    private ErrorLabel errorTel ;
    private ErrorLabel errorCin ;
    private ErrorLabel errorMail ;
+   private ErrorLabel errorSexe;
     private LabelFieldForms nomLabel ;
     private LabelFieldForms prenomLabel ;
 
@@ -68,6 +69,13 @@ public class ClientForm extends JPanel {
         return submitBtn;
     }
 
+    public ErrorLabel getErrorSexe() {
+        return errorSexe;
+    }
+
+    public void setErrorSexe(String errorSexe) {
+        this.errorSexe.setText(errorSexe);
+    }
 
     public void setNom(String nom) {
        this.nom.setText(nom);
@@ -165,6 +173,7 @@ public class ClientForm extends JPanel {
         errorTel = new ErrorLabel();
         errorCin = new ErrorLabel();
         errorMail = new ErrorLabel();
+        errorSexe = new ErrorLabel();
         nomLabel = new LabelFieldForms("Nom",color,font);
         nomLabel.setBounds(20,30,120,30);
         prenomLabel = new LabelFieldForms("Prenom",color,font);
@@ -188,6 +197,7 @@ public class ClientForm extends JPanel {
         errorTel.setBounds(110,195,190,30);
         errorCin.setBounds(455,195,190,30);
         errorMail.setBounds(110,265,190,30);
+        errorSexe.setBounds(455,265,190,30);
     }
 
     public void initLabels(String nom , String prenom , String login , String mdp , String tel , String cin , String mail , String sexe,Color color , Font font){
@@ -221,6 +231,7 @@ public class ClientForm extends JPanel {
         errorTel.setBounds(110,195,190,30);
         errorCin.setBounds(455,195,190,30);
         errorMail.setBounds(110,265,190,30);
+        errorSexe.setBounds(455,265,190,30);
     }
 
 
@@ -250,6 +261,7 @@ public class ClientForm extends JPanel {
         mail = new BorderLessField(color);
         mail.setBounds(110,240,200,30);
         sexe = new JComboBox<>(new String[]{"HOMME", "FEMME"});
+        sexe.setSelectedIndex(-1);
         sexe.setBounds(455,240,200,30);
     }
 
@@ -284,6 +296,7 @@ public class ClientForm extends JPanel {
         add(errorCin);
         add(errorMail);
         add(errorTel);
+        add(errorSexe);
         setBackground(bgColor);
     }
 }

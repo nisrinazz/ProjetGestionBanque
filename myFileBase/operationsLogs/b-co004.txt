@@ -1,5 +1,2 @@
 DATE			TIME			TYPE			MESSAGE
-2023-02-15			13:14:57.692678800			RETRAIT			Montant 10DH retiré de votre compte
-2023-02-15			14:02:57.581361300			VERSEMENT			Montant 11223444444444DH versé en votre faveur
-2023-02-15			14:03:15.465241			RETRAIT			Montant 122222222222DH retiré de votre compte
-2023-02-15			14:03:50.802097400			RETRAIT			Montant 123DH retiré de votre compte
+2023-02-16			22:38:52.576929400			CREATION			Compte b-co004 nouvellement crée avec un solde initiale de 300.0 DH

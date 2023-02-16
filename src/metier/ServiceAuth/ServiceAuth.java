@@ -1,7 +1,10 @@
 package metier.ServiceAuth;
 
 import dao.IAuthDAO;
+import dao.IClientDAO;
+import dao.ICompteDAO;
 import dao.dbFiles.AuthDAOFile;
+import dao.dbFiles.ClientDAOFile;
 import dao.dbFiles.CompteDAOFile;
 import metier.forms.LoginFormValidator;
 import presentation.modele.Client;
@@ -13,6 +16,9 @@ import java.util.Map;
 
 public class ServiceAuth implements IServiceAuth {
    private Utilisateur session;
+   ICompteDAO compteDAO ;
+   IClientDAO clientDAO;
+
 
     public Utilisateur getSession() {
         return session;
@@ -22,12 +28,17 @@ public class ServiceAuth implements IServiceAuth {
         this.session = session;
     }
 
-    public ServiceAuth(){}
+    public void setSession(){
+        session = clientDAO.findById(session.getId());
+    }
+    public ServiceAuth(){
+        this.clientDAO = new ClientDAOFile();
+        this.compteDAO = new CompteDAOFile();
+    }
 
     @Override
     public List<Compte> choisirCompte(){
-        CompteDAOFile compteDAOFile = new CompteDAOFile();
-        return compteDAOFile.findByOwner((Client)session);
+        return compteDAO.findByOwner((Client)session);
     }
 
     @Override
@@ -40,9 +51,10 @@ public class ServiceAuth implements IServiceAuth {
 
         return loginFormValidator.Errors();
 }
-   @Override
-   public void seDeconnecter(){
+
+    @Override
+    public void seDeconnecter() {
         session=null;
-   }
+    }
 
 }

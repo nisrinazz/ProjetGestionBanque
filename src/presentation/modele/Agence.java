@@ -2,27 +2,16 @@ package presentation.modele;
 
 import dao.dbFiles.FileBasePaths;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Banque {
+public class Agence {
 //utilisé pou dbVolatile
-    private static long          compteur = 1;
     private Long                 idBanque;
     private String              nomBanque;
     private String              adresseBanque;
     private String              telBanque;
     private String              emailBanque;
-    //utilisé pour dbVolatile
-    private List<Client>        clientsDeBanque = new ArrayList<>();
 
-    public Banque()
+    public Agence(String nom, String adresse, String tel, String mail)
                     {
-                        idBanque = compteur++;
-                    }
-    public Banque(String nom, String adresse, String tel, String mail)
-                    {
-                        idBanque        = compteur++;
                         nomBanque       = nom;
                         telBanque       = tel;
                         adresseBanque   = adresse;
@@ -45,9 +34,6 @@ public class Banque {
     public String           getAdresseBanque() {
         return adresseBanque;
     }
-    public List<Client>     getClientsDeBanque() {
-        return clientsDeBanque;
-    }
 
     public void             setIdBanque(Long idBanque) {
         this.idBanque = idBanque;
@@ -63,9 +49,6 @@ public class Banque {
     }
     public void             setTelBanque(String telBanque) {
         this.telBanque = telBanque;
-    }
-    public void             setClientsDeBanque(List<Client> clientsDeBanque) {
-        this.clientsDeBanque = clientsDeBanque;
     }
     @Override
     public String toString() {

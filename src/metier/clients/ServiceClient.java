@@ -15,8 +15,8 @@ import java.util.Map;
 
 public class ServiceClient implements IServiceClient {
         private ICompteDAO compteDAO ;
-        private  ILogsDAO logsDAO = new LogDAOFile();
-        Compte compte ;
+        private  ILogsDAO logsDAO;
+       private Compte compte ;
         public Compte getCompte() {
             return compte;
         }
@@ -26,6 +26,7 @@ public class ServiceClient implements IServiceClient {
         public ServiceClient(Compte compte) {
             this.compte = compte ;
             compteDAO = new CompteDAOFile();
+            logsDAO = new LogDAOFile();
         }
 
     public boolean autorisationOp(){
@@ -68,8 +69,8 @@ public class ServiceClient implements IServiceClient {
             benef.setSolde(benef.getSolde()+Double.parseDouble(montant));
             compteDAO.update(compte);
             compteDAO.update(benef);
-            String msg1 = "Virement d'un montant de "+montant +"DH versé à partir de votre compte en faveur du compte "+compte.getNumeroCompte();
-            String msg2 = "Virement d'un montant de "+ montant +"DH versé en votre faveur à partir du compte "+benef.getNumeroCompte();
+            String msg1 = "Virement d'un montant de "+montant +" DH versé à partir de votre compte en faveur du compte "+compte.getNumeroCompte();
+            String msg2 = "Virement d'un montant de "+ montant + "DH versé en votre faveur à partir du compte "+benef.getNumeroCompte();
             logsDAO.save(compte , TypeLog.VIREMENT, msg1);
             logsDAO.save(benef ,TypeLog.VIREMENT, msg2);
         }

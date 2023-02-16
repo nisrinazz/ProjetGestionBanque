@@ -28,24 +28,34 @@ public class FooterCrud extends JPanel {
         searchBar = new SearchBar(hint ,gainColor , lostColor, iconSearch ,iconSearchH ,bgColor,bgSearchBtn);
     }
 
-    public FooterCrud(Color bgColor, String hint, Color gainColor , Color lostColor , ImageIcon iconSearch , ImageIcon iconSearchH, Color bgSearchBtn, ImageIcon addBtnIcon , ImageIcon editBtnIcon , ImageIcon deleteBtnIcon){
-        initPanel(bgColor,hint,gainColor , lostColor, iconSearch ,iconSearchH ,bgSearchBtn,addBtnIcon,editBtnIcon,deleteBtnIcon);
-        add(tableCrudPanel);
-        setBackground(bgColor);
-        setLayout(new BorderLayout());
-        add(searchBar,BorderLayout.WEST);
-        add(tableCrudPanel,BorderLayout.EAST);
-        setBorder(new EmptyBorder(15,15,20,3));
+    public void initPanel(Color bgColor,String hint,Color gainColor , Color lostColor , ImageIcon iconSearch , ImageIcon iconSearchH,Color bgSearchBtn){
+        searchBar = new SearchBar(hint ,gainColor , lostColor, iconSearch ,iconSearchH ,bgColor,bgSearchBtn);
     }
 
-    public FooterCrud(Color bgColor, String hint, Color gainColor , Color lostColor , ImageIcon iconSearch , ImageIcon iconSearchH, Color bgSearchBtn, ImageIcon addBtnIcon , ImageIcon deleteBtnIcon){
-        initPanel(bgColor,hint,gainColor , lostColor, iconSearch ,iconSearchH ,bgSearchBtn,addBtnIcon,deleteBtnIcon);
-        add(tableCrudPanel);
+    public FooterCrud(Color bgColor, String hint, Color gainColor , Color lostColor , ImageIcon iconSearch , ImageIcon iconSearchH, Color bgSearchBtn, ImageIcon addBtnIcon , ImageIcon editBtnIcon , ImageIcon deleteBtnIcon){
+        initPanel(bgColor,hint,gainColor , lostColor, iconSearch ,iconSearchH ,bgSearchBtn,addBtnIcon,editBtnIcon,deleteBtnIcon);
         setBackground(bgColor);
         setLayout(new BorderLayout());
         add(searchBar,BorderLayout.WEST);
         add(tableCrudPanel,BorderLayout.EAST);
         setBorder(new EmptyBorder(15,15,25,3));
+    }
+
+    public FooterCrud(Color bgColor, String hint, Color gainColor , Color lostColor , ImageIcon iconSearch , ImageIcon iconSearchH, Color bgSearchBtn, ImageIcon addBtnIcon , ImageIcon deleteBtnIcon){
+        initPanel(bgColor,hint,gainColor , lostColor, iconSearch ,iconSearchH ,bgSearchBtn,addBtnIcon,deleteBtnIcon);
+        setBackground(bgColor);
+        setLayout(new BorderLayout());
+        add(searchBar,BorderLayout.WEST);
+        add(tableCrudPanel,BorderLayout.EAST);
+        setBorder(new EmptyBorder(15,15,25,3));
+    }
+
+    public FooterCrud(Color bgColor, String hint, Color gainColor , Color lostColor , ImageIcon iconSearch , ImageIcon iconSearchH, Color bgSearchBtn){
+        initPanel(bgColor,hint,gainColor , lostColor, iconSearch ,iconSearchH ,bgSearchBtn);
+        setBackground(bgColor);
+        setLayout(new BorderLayout());
+        add(searchBar,BorderLayout.CENTER);
+        setBorder(new EmptyBorder(15,15,30,3));
     }
 
 

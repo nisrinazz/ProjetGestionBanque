@@ -1,5 +1,6 @@
 package presentation.vue.AdminFrames;
 
+import metier.admin.IServiceAdmin;
 import metier.admin.ServiceAdmin;
 import presentation.vue.palette.ClientForm;
 import presentation.vue.palette.HeaderWithTitle;
@@ -9,11 +10,12 @@ import java.awt.*;
 import java.util.Map;
 
 public class AddClientJDialog extends JDialog {
-    ClassLoader cl = getClass().getClassLoader();
-    HeaderWithTitle headerWithTitle ;
-    ClientForm clientForm;
-    Container container ;
+    private IServiceAdmin serviceAdmin ;
+    private ClassLoader cl = getClass().getClassLoader();
+   private HeaderWithTitle headerWithTitle ;
+   private ClientForm clientForm;
 
+   private Container container ;
 
     public void initPanel(){
       headerWithTitle = new HeaderWithTitle(Color.WHITE,Color.BLACK,new ImageIcon(cl.getResource("icons/AddUser.png")),"Add Client",new Font("Arial",Font.BOLD,24));
@@ -22,7 +24,6 @@ public class AddClientJDialog extends JDialog {
     }
 
    public void initActions(){
-       ServiceAdmin serviceAdmin = new ServiceAdmin();
             clientForm.getSubmitBtn().addActionListener(e->{
             clientForm.getErrorNom().setVisible(false);
             clientForm.getErrorPrenom().setVisible(false);
@@ -30,7 +31,7 @@ public class AddClientJDialog extends JDialog {
             clientForm.getErrorMdp().setVisible(false);
             clientForm.getErrorTel().setVisible(false);
             clientForm.getErrorMail().setVisible(false);
-            clientForm.getErrorCin().setVisible(false);
+            clientForm.getErrorSexe().setVisible(false);
             String nom    =    clientForm.getNom().getText();
             String prenom =    clientForm.getPrenom().getText();
             String login =     clientForm.getLogin().getText();
@@ -68,10 +69,15 @@ public class AddClientJDialog extends JDialog {
                       {   clientForm.getErrorMail().setVisible(true);
                           clientForm.setErrorMail(errorList.get(error));
                       }
-                      else
+                      else if(error.equalsIgnoreCase("tel"))
                       {   clientForm.getErrorTel().setVisible(true);
                           clientForm.setErrorTel(errorList.get(error));
                       }
+                      else
+                      {   clientForm.getErrorSexe().setVisible(true);
+                          clientForm.setErrorSexe(errorList.get(error));
+                      }
+
                }
            }
             });
@@ -80,12 +86,13 @@ public class AddClientJDialog extends JDialog {
     public void initContainer(){
         container = getContentPane();
         initPanel();
-        setLayout(new BorderLayout());
-        add(headerWithTitle,BorderLayout.NORTH);
-        add(clientForm,BorderLayout.CENTER);
+        container.setLayout(new BorderLayout());
+        container.add(headerWithTitle,BorderLayout.NORTH);
+        container.add(clientForm,BorderLayout.CENTER);
     }
 
-    public AddClientJDialog(){
+    public AddClientJDialog(IServiceAdmin serviceAdmin){
+        this.serviceAdmin = serviceAdmin;
         initContainer();
         setResizable(false);
         setSize(700,500);

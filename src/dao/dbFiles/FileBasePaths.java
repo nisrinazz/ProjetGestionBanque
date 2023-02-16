@@ -61,6 +61,7 @@ public interface FileBasePaths {
         createFileOrDirectory(BANK_AGENCIES_TABLE,  true, AGENCY_TABLE_HEADER);
 
     }
+
     String CLIENT_TABLE_HEADER  =  "ID\t\t\tNOM\t\t\tPRENOM\t\t\tLOGIN\t\t\tMOT DE PASSE\t\t\tCIN\t\t\tEMAIL\t\t\tTELEPHONE\t\t\tSEXE\n";
     String ACCOUNT_TABLE_HEADER = "ID\t\t\tDATE_CREATION\t\t\tSOLDE\t\t\tID_CLIENT\n";
     String AGENCY_TABLE_HEADER  = "ID\t\t\tNOM\t\t\tEMAIL\t\t\tTELEPHONE\t\t\tADRESSE\n";

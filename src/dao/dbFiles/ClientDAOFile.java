@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 public class ClientDAOFile implements IClientDAO {
 
-
     public ClientDAOFile(){}
     @Override
     public List<Client> findAll() {
@@ -104,7 +103,7 @@ public class ClientDAOFile implements IClientDAO {
                 client.getCin()+ "\t\t\t" +
                 (client.getEmail()!=null&&client.getEmail().trim().length()!=0?client.getEmail():"NULL")+ "\t" +
                 (client.getTel()!=null&&client.getTel().trim().length()!=0?client.getTel():"NULL")+ "\t\t" +
-                (client.getSexe()!=null?client.getSexe():"NULL")+ "\t\tNULL\n" ;
+                (client.getSexe()!=null?client.getSexe():"NULL")+  "\n" ;
 
         try {
             Files.writeString(FileBasePaths.CLIENT_TABLE, clientStr, StandardOpenOption.APPEND);
@@ -144,7 +143,7 @@ public class ClientDAOFile implements IClientDAO {
                         })
                         .collect(Collectors.toList());
         FileBasePaths.changeFile(FileBasePaths.CLIENT_TABLE, FileBasePaths.CLIENT_TABLE_HEADER);
-        saveAll(clientsUpdated);
+        saveAllWithIds(clientsUpdated);
         return newClient;
     }
     @Override

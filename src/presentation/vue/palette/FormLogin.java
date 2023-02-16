@@ -4,10 +4,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FormLogin extends JPanel{
     JTextField loginField ;
     JLabel login , pass ;
+    JCheckBox passIcon ;
     JPasswordField passField ;
     Button loginBtn ;
     ErrorLabel errorLogin , errorMdp ;
@@ -49,7 +52,22 @@ public class FormLogin extends JPanel{
         return loginBtn;
     }
 
-
+    public void initCheckBox(Icon hidePass , Icon showPass,Color bgColor){
+        passIcon = new JCheckBox(hidePass);
+        passIcon.setOpaque(true);
+        passIcon.setBackground(bgColor);
+            passIcon.setBounds(345,115,30,30);
+        passIcon.addActionListener(click->{
+            if(passIcon.isSelected()){
+                passIcon.setIcon(showPass);
+                passField.setEchoChar((char) 0);
+            }
+            else{
+                passIcon.setIcon(hidePass);
+                passField.setEchoChar('•');
+            }
+        });
+    }
     public void initLabel(String login , String pass , Font font , Color color){
         errorLogin = new ErrorLabel();
         errorMdp = new ErrorLabel();
@@ -65,6 +83,7 @@ public class FormLogin extends JPanel{
         this.pass.setFont(font);
         this.login.setForeground(color);
         this.pass.setForeground(color);
+
     }
     public void initFields(){
          loginField = new JTextField(20);
@@ -81,10 +100,11 @@ public class FormLogin extends JPanel{
         loginBtn.setBounds(160,190,120,30);
     }
 
-    public FormLogin(Color bgColor , String login , String pass , Font font , Color color, String buttonName, Color bgColorBtn, Color fgColorBtn , Font fontBtn){
+    public FormLogin(Color bgColor , String login , String pass , Font font , Color color, String buttonName, Color bgColorBtn, Color fgColorBtn , Font fontBtn,ImageIcon hidePass , ImageIcon showPass){
          initLabel(login,pass,font,color);
          initFields();
          initButtons(buttonName,bgColorBtn,fgColorBtn,fontBtn);
+        initCheckBox(hidePass,showPass,bgColor);
          setLayout(null);
          add(this.login);
          add(this.pass);
@@ -93,6 +113,7 @@ public class FormLogin extends JPanel{
          add(errorForm);
          add(loginField);
          add(passField);
+         add(passIcon);
          add(loginBtn);
          setBackground(bgColor);
     }

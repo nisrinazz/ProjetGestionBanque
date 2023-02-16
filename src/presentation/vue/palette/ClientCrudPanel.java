@@ -1,49 +1,66 @@
-package presentation.vue.AdminFrames;
+package presentation.vue.palette;
 
 import metier.admin.IServiceAdmin;
 import metier.admin.ServiceAdmin;
 import presentation.modele.Admin;
 import presentation.modele.Client;
+import presentation.vue.AdminFrames.AddClientJDialog;
+import presentation.vue.AdminFrames.UpdateClientDialog;
 import presentation.vue.palette.FooterCrud;
 import presentation.vue.palette.HeaderWithLinks;
 import presentation.vue.palette.TablePanelClient;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class ClientCrudPanel extends JPanel {
     ClassLoader cl = getClass().getClassLoader();
-     HeaderWithLinks headerAdmin ;
+
     FooterCrud footerCrudClient;
     TablePanelClient tablePanelClient ;
+    FilterSortPanel sortPanel ;
+
+    IServiceAdmin serviceAdmin;
 
 
     void initPanels(){
         footerCrudClient =  new FooterCrud(Color.BLACK,"Chercher...",Color.BLACK, Color.GRAY, new ImageIcon(cl.getResource("icons/search.png")), new ImageIcon(cl.getResource("icons/searchHover.png")),Color.WHITE, new ImageIcon(cl.getResource("icons/add.png")), new ImageIcon(cl.getResource("icons/edit.png")), new ImageIcon(cl.getResource("icons/delete.png")));
-        headerAdmin =new HeaderWithLinks(Color.BLACK,new Font("Verdana", Font.CENTER_BASELINE,15),new Font("Verdana",Font.ITALIC,12),Color.WHITE,Color.WHITE,new ImageIcon(cl.getResource("icons/menu1.png")),new ImageIcon(cl.getResource("icons/infoDropDown.png")),new Font("Verdana",Font.BOLD,17), Color.WHITE,"Client","Banque","Compte","Statistiques");
-        headerAdmin.getSectionInformation().setNameUser(Admin.getInstance().getNomComplet());
-        headerAdmin.getSectionInformation().setRoleUser(Admin.getInstance().getRole());
-        tablePanelClient = new TablePanelClient(Color.BLACK,Color.WHITE,new Font("Verdana",Font.BOLD,19),new Font("Verdana",Font.CENTER_BASELINE,16));
+        tablePanelClient = new TablePanelClient(serviceAdmin,Color.BLACK,Color.WHITE,new Font("Verdana",Font.BOLD,19),new Font("Verdana",Font.CENTER_BASELINE,16));
+        sortPanel = new FilterSortPanel("Trier par :",new Font("Verdana",Font.BOLD,18),Color.BLACK,new Font("Verdana",Font.ITALIC,18),Color.BLACK,"Aucun","Nom","Prénom","Sexe","CIN","Email","Solde des comptes");
     }
 
-    public ClientCrudPanel(){
+    public ClientCrudPanel(IServiceAdmin serviceAdmin){
+        this.serviceAdmin = serviceAdmin;
         initPanels();
+        JPanel panel = new JPanel();
+        panel.setBorder(new EmptyBorder(20,0,0,0));
+        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        panel.add(sortPanel);
+        panel.add(tablePanelClient);
         setLayout(new BorderLayout());
-        add(headerAdmin,BorderLayout.NORTH);
         add(footerCrudClient,BorderLayout.SOUTH);
-        add(tablePanelClient,BorderLayout.CENTER);
+        add(panel,BorderLayout.CENTER);
         initActions();
     }
 
     public void initActions(){
-        IServiceAdmin serviceAdmin = new ServiceAdmin();
+        //Trier
+        sortPanel.getList().forEach((name, button)->button.addActionListener(click->{
+            if(name.equals("Nom")) tablePanelClient.getTableModel().initClientsData(serviceAdmin.trierClientParNom());
+            else if(name.equals("Prénom")) tablePanelClient.getTableModel().initClientsData(serviceAdmin.trierClientParPrenom());
+            else if(name.equals("Sexe")) tablePanelClient.getTableModel().initClientsData(serviceAdmin.trierParSexe());
+            else if(name.equals("CIN")) tablePanelClient.getTableModel().initClientsData(serviceAdmin.trierClientParCin());
+            else if(name.equals("Email")) tablePanelClient.getTableModel().initClientsData(serviceAdmin.trierClientParEmail());
+            else if(name.equals("Solde des comptes")) tablePanelClient.getTableModel().initClientsData(serviceAdmin.trierClientParSoldeCompte());
+            else tablePanelClient.getTableModel().initClientsData(serviceAdmin.listeClients());
+        }));
         //Bouton d'ajout
         footerCrudClient.getTableCrudPanel().getAddButton().addActionListener(click->{
-             new AddClientJDialog();
+             new AddClientJDialog(serviceAdmin);
             tablePanelClient.getTableModel().initClientsData(serviceAdmin.listeClients());
-
         });
         //Bouton de suppression
         footerCrudClient.getTableCrudPanel().getDeleteButton().addActionListener(click->{
@@ -77,7 +94,7 @@ public class ClientCrudPanel extends JPanel {
             else {
                 long id = (long)tablePanelClient.getTableModel().getValueAt(row,0);
                 Client client = serviceAdmin.chercherClientParId(id);
-                   new UpdateClientDialog(client);
+                   new UpdateClientDialog(client,serviceAdmin);
                    tablePanelClient.getTableModel().initClientsData(serviceAdmin.listeClients());
             }
         });

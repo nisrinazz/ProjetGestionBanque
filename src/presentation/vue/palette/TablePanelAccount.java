@@ -1,5 +1,6 @@
 package presentation.vue.palette;
 import dao.dbFiles.CompteDAOFile;
+import metier.admin.IServiceAdmin;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +15,8 @@ public class TablePanelAccount extends JPanel {
 
     private JScrollPane scrollPane ;
 
+    IServiceAdmin serviceAdmin ;
+
     public TableModelAccount getTableModel() {
         return tableModel;
     }
@@ -26,7 +29,7 @@ public class TablePanelAccount extends JPanel {
     private void initTable(Color bgHeaderColor , Color fgHeaderColor , Font headerFont , Font rowsFont){
         tableModel = new TableModelAccount();
         tableModel.initColumns("Id", "Date de création", "Solde", "Nom du propriétaire");
-        tableModel.initAccountsData(new CompteDAOFile().findAll());
+        tableModel.initAccountsData(serviceAdmin.listeComptes());
         table = new JTable(tableModel);
         table.setFont(rowsFont);
         table.setRowHeight(35);
@@ -42,7 +45,8 @@ public class TablePanelAccount extends JPanel {
         JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER);
         header.setBorder(new LineBorder(bgHeaderColor,1,false));
     }
-    public TablePanelAccount(Color bgHeaderColor ,Color fgHeaderColor , Font headerFont , Font rowsFont){
+    public TablePanelAccount(IServiceAdmin serviceAdmin ,Color bgHeaderColor ,Color fgHeaderColor , Font headerFont , Font rowsFont){
+        this.serviceAdmin = serviceAdmin;
         setBorder(new EmptyBorder(40,-10,-10,-1));
         initTable(bgHeaderColor,fgHeaderColor,headerFont,rowsFont);
         setLayout(new BorderLayout());

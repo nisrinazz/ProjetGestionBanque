@@ -1,15 +1,16 @@
 package presentation.controleur;
 
 
-import dao.dbFiles.FileBasePaths;
-import presentation.modele.Banque;
-
-import java.io.File;
+import metier.ServiceAuth.IServiceAuth;
+import metier.ServiceAuth.ServiceAuth;
+import presentation.vue.LoginFrames.LoginFrame;
 
 public class MaBanque {
 
         public static void main(String[] args) {
-                FileBasePaths.createFileBase();
+                IServiceAuth serviceAuth = new ServiceAuth();
+
+                new LoginFrame(serviceAuth);
 
         }
 }

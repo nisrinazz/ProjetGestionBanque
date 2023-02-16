@@ -1,5 +1,6 @@
 package metier.clients;
 
+import presentation.modele.Compte;
 import presentation.modele.Log;
 
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IServiceClient {
+        public Compte getCompte();
         public boolean autorisationOp();
         Map<String,String> versement(String solde);
         Map<String,String> retrait  (String solde);

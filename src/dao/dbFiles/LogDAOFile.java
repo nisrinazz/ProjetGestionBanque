@@ -53,7 +53,11 @@ public class LogDAOFile implements ILogsDAO {
 
     @Override
     public List<Log> findByDate(Compte compte, LocalDate date) {
-        return findAll(compte).stream().filter(log->log.getDate().equals(date)).collect(Collectors.toList());
+        return findAll(compte).stream().filter(log-> {
+           int result =  log.getDate().compareTo(date);
+           if(result == 0) return true ;
+           return false ;
+        }).collect(Collectors.toList());
     }
 
     @Override

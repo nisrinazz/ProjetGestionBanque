@@ -1,2 +1,3 @@
 DATE			TIME			TYPE			MESSAGE
-2023-02-13			15:16:33.122145			CREATION			Compteb-co001 nouvellement crée avec un solde initiale de 12344.0DH
+2023-02-16			22:38:21.532489100			CREATION			Compte b-co001 nouvellement crée avec un solde initiale de 101.0 DH
+2023-02-16			22:39:50.674218600			VIREMENT			Virement d'un montant de 200DH versé en votre faveur à partir du compte b-co001

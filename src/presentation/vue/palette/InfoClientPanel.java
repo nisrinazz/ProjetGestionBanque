@@ -1,5 +1,6 @@
 package presentation.vue.palette;
 
+import metier.clients.IServiceClient;
 import metier.clients.ServiceClient;
 import presentation.modele.Compte;
 
@@ -8,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class InfoClientPanel extends JPanel {
-    Compte compte ;
+   IServiceClient serviceClient ;
     StatElement soldePanel ;
     StatElement derniereOpPanel ;
     StatElement numComptePanel ;
@@ -20,10 +21,9 @@ public class InfoClientPanel extends JPanel {
     ClassLoader cl = getClass().getClassLoader();
 
     public void initData(){
-        ServiceClient serviceClient = new ServiceClient(compte);
         String solde = serviceClient.soldeCompte().toString() + " DH";
         String derniereOp = serviceClient.derniereOperation().getType().name();
-        String numCompte = compte.getNumeroCompte();
+        String numCompte = serviceClient.getCompte().getNumeroCompte();
         String nbrCompte = serviceClient.nbrCompteClient().toString();
 
         soldePanel.setInfo(solde);
@@ -34,15 +34,15 @@ public class InfoClientPanel extends JPanel {
     }
 
     public void initPanels(){
-        soldePanel = new StatElement(new Color(125,219,211),30,new ImageIcon(cl.getResource("icons/money.png")),"Solde Actuel",new Color(103,175,170),new Color(103,175,170),fontTitle,fontInfo);
+        soldePanel = new StatElement(new Color(125,219,211),30,new ImageIcon(cl.getResource("icons/money.png")),"Solde du compte",new Color(103,175,170),new Color(103,175,170),fontTitle,fontInfo);
         derniereOpPanel = new StatElement(new Color(241,112,95),30,new ImageIcon(cl.getResource("icons/last.png")),"Dernière Opération",new Color(198,91,75),new Color(198,91,75),fontTitle,fontInfo);
         numComptePanel = new StatElement(new Color(243,189,106),30,new ImageIcon(cl.getResource("icons/numAccount.png")),"Numéro du compte",new Color(206,160,91),new Color(206,160,91),fontTitle,fontInfo);
         nbrComptePanel = new StatElement(new Color(207,146,225),30,new ImageIcon(cl.getResource("icons/nbrAccount.png")),"Nombre de compte",new Color(162,118,175),new Color(162,118,175),fontTitle,fontInfo);
         initData();
     }
 
-    public InfoClientPanel(Compte compte){
-        this.compte=compte;
+    public InfoClientPanel(IServiceClient serviceClient){
+        this.serviceClient=serviceClient;
         initPanels();
         GridLayout layout = new GridLayout(2,2);
         layout.setHgap(20);
@@ -53,7 +53,6 @@ public class InfoClientPanel extends JPanel {
         add(derniereOpPanel);
         add(numComptePanel);
         add(nbrComptePanel);
-
     }
 }
 

@@ -23,7 +23,7 @@ public class TableModelAccount extends AbstractTableModel {
             data[i][0]=compte.getNumeroCompte();
             data[i][1]=compte.getDateCreation().toLocalDate();
             data[i][2]=compte.getSolde() + " DH";
-            data[i][3]=compte.getPropriétaire().getNom() + " "+compte.getPropriétaire().getPrenom();
+            data[i][3]=compte.getPropriétaire().getNomComplet();
             i++;
         }
         this.fireTableDataChanged();

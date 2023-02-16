@@ -2,6 +2,8 @@ package presentation.vue.palette;
 
 import dao.dbFiles.CompteDAOFile;
 import dao.dbFiles.LogDAOFile;
+import metier.clients.IServiceClient;
+import metier.clients.ServiceClient;
 import presentation.modele.Client;
 import presentation.modele.Compte;
 
@@ -14,8 +16,9 @@ import java.awt.*;
 
 public class TablePanelLogs extends JPanel {
     private JTable table;
-    private Compte compte ;
     private TableModelLogs tableModel;
+
+    IServiceClient serviceClient ;
 
     private JScrollPane scrollPane ;
 
@@ -31,7 +34,7 @@ public class TablePanelLogs extends JPanel {
     private void initTable(Color bgHeaderColor , Color fgHeaderColor , Font headerFont , Font rowsFont){
         tableModel = new TableModelLogs();
         tableModel.initColumns("Type", "Date","Message");
-        tableModel.initLogsData(new LogDAOFile().findAll(compte));
+        tableModel.initLogsData(serviceClient.listeLogs());
         table = new JTable(tableModel);
         table.setFont(rowsFont);
         table.setRowHeight(35);
@@ -47,8 +50,8 @@ public class TablePanelLogs extends JPanel {
         JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER);
         header.setBorder(new LineBorder(bgHeaderColor,1,false));
     }
-    public TablePanelLogs(Compte compte ,Color bgHeaderColor ,Color fgHeaderColor , Font headerFont , Font rowsFont){
-        this.compte = compte;
+    public TablePanelLogs(IServiceClient serviceClient, Color bgHeaderColor , Color fgHeaderColor , Font headerFont , Font rowsFont){
+        this.serviceClient = serviceClient;
         setBorder(new EmptyBorder(40,-10,-10,-1));
         initTable(bgHeaderColor,fgHeaderColor,headerFont,rowsFont);
         setLayout(new BorderLayout());

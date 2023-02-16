@@ -1,4 +1,5 @@
 package presentation.vue.AdminFrames;
+import metier.admin.IServiceAdmin;
 import metier.admin.ServiceAdmin;
 import presentation.vue.palette.AccountForm;
 import presentation.vue.palette.HeaderWithTitle;
@@ -7,10 +8,13 @@ import java.awt.*;
 import java.util.Map;
 
 public class AddAccountDialog extends JDialog {
-    ClassLoader cl = getClass().getClassLoader();
-    HeaderWithTitle headerWithTitle ;
-    AccountForm accountForm;
-    Container container ;
+   private IServiceAdmin serviceAdmin ;
+   private ClassLoader cl = getClass().getClassLoader();
+   private HeaderWithTitle headerWithTitle ;
+  private   AccountForm accountForm;
+
+  private Container container;
+
 
     public void initPanel(){
         headerWithTitle = new HeaderWithTitle(Color.WHITE,Color.BLACK,new ImageIcon(cl.getResource("icons/addAccount.png")),"Add Account",new Font("Verdana",Font.BOLD,24));
@@ -21,13 +25,12 @@ public class AddAccountDialog extends JDialog {
         container = getContentPane();
         initPanel();
         initActions();
-        setLayout(new BorderLayout());
-        add(headerWithTitle,BorderLayout.NORTH);
-        add(accountForm,BorderLayout.CENTER);
+        container.setLayout(new BorderLayout());
+        container.add(headerWithTitle,BorderLayout.NORTH);
+        container.add(accountForm,BorderLayout.CENTER);
     }
 
     public void initActions(){
-        ServiceAdmin serviceAdmin = new ServiceAdmin();
         accountForm.getSubmitBtn().addActionListener(click->{
             accountForm.getIdClientError().setVisible(false);
             accountForm.getSoldeError().setVisible(false);
@@ -52,7 +55,8 @@ public class AddAccountDialog extends JDialog {
         });
     }
 
-    public AddAccountDialog(){
+    public AddAccountDialog(IServiceAdmin serviceAdmin){
+        this.serviceAdmin = serviceAdmin;
         initContainer();
         setResizable(false);
         setSize(700,300);

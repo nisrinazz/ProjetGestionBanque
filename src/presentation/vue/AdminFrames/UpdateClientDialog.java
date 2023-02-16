@@ -1,5 +1,6 @@
 package presentation.vue.AdminFrames;
 
+import metier.admin.IServiceAdmin;
 import metier.admin.ServiceAdmin;
 import presentation.modele.Client;
 import presentation.vue.palette.ClientForm;
@@ -10,11 +11,14 @@ import java.awt.*;
 import java.util.Map;
 
 public class UpdateClientDialog extends JDialog {
-    ClassLoader cl = getClass().getClassLoader();
-    HeaderWithTitle headerWithTitle ;
-    ClientForm clientForm;
-    Container container ;
-    Client client ;
+   private ClassLoader cl = getClass().getClassLoader();
+    private HeaderWithTitle headerWithTitle ;
+    private ClientForm clientForm;
+   private Client client ;
+
+   private IServiceAdmin serviceAdmin ;
+
+   private Container container ;
 
 
     public void initPanel(){
@@ -25,14 +29,13 @@ public class UpdateClientDialog extends JDialog {
     public void initContainer(){
         container = getContentPane();
         initPanel();
-        setLayout(new BorderLayout());
-        add(headerWithTitle,BorderLayout.NORTH);
-        add(clientForm,BorderLayout.CENTER);
+        container.setLayout(new BorderLayout());
+        container.add(headerWithTitle,BorderLayout.NORTH);
+        container.add(clientForm,BorderLayout.CENTER);
         initActions();
     }
 
     public void initActions(){
-        ServiceAdmin serviceAdmin = new ServiceAdmin();
         clientForm.getSubmitBtn().addActionListener(e->{
             clientForm.getErrorNom().setVisible(false);
             clientForm.getErrorPrenom().setVisible(false);
@@ -87,7 +90,8 @@ public class UpdateClientDialog extends JDialog {
         });
     }
 
-    public UpdateClientDialog(Client client){
+    public UpdateClientDialog(Client client,IServiceAdmin serviceAdmin){
+        this.serviceAdmin=serviceAdmin;
         initContainer();
         setSize(700,500);
         setResizable(false);

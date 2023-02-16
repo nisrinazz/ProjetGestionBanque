@@ -1,8 +1,7 @@
 package presentation.vue.ClientFrames;
 
 import metier.Verifiable;
-import metier.clients.ServiceClient;
-import presentation.modele.Compte;
+import metier.clients.IServiceClient;
 import presentation.vue.palette.HeaderWithTitle;
 import presentation.vue.palette.OneFieldForm;
 
@@ -11,11 +10,12 @@ import java.awt.*;
 import java.util.Map;
 
 public class RetraitOpDialog extends JDialog implements Verifiable{
-    Compte compte ;
-    ClassLoader cl = getClass().getClassLoader();
-    HeaderWithTitle headerWithTitle ;
-    OneFieldForm retraitForm;
-    Container container ;
+
+   private IServiceClient serviceClient ;
+   private ClassLoader cl = getClass().getClassLoader();
+   private HeaderWithTitle headerWithTitle ;
+   private OneFieldForm retraitForm;
+   private Container container ;
 
     public void initPanel(){
         headerWithTitle = new HeaderWithTitle(Color.WHITE,Color.BLACK,new ImageIcon(cl.getResource("icons/operation.png")),"Retrait",new Font("Verdana",Font.BOLD,24));
@@ -24,32 +24,30 @@ public class RetraitOpDialog extends JDialog implements Verifiable{
     }
 
     public void initAction(){
-        ServiceClient serviceClient = new ServiceClient(compte);
         retraitForm.getSubmit().addActionListener(click->{
-            retraitForm.getError().setVisible(false);
-            String montant = retraitForm.getField().getText();
-            Map<String,String> errors = serviceClient.retrait(montant);
-            if(errors.isEmpty()) {
-                dispose();
-            }
-            else {
-                for(String error : errors.keySet()) {
+                retraitForm.getError().setVisible(false);
+                String montant = retraitForm.getField().getText();
+                Map<String, String> errors = serviceClient.retrait(montant);
+                if (errors.isEmpty()) {
+                    dispose();
+                } else {
+                    for (String error : errors.keySet()) {
                         retraitForm.getError().setVisible(true);
                         retraitForm.setError(errors.get(error));
-                }
-            }
-        });
-    }
+                    }
+                }}
+            );
+        }
 
     public void initContainer(){
         container = getContentPane();
         initPanel();
-        setLayout(new BorderLayout());
-        add(headerWithTitle,BorderLayout.NORTH);
-        add(retraitForm,BorderLayout.CENTER);
+        container.setLayout(new BorderLayout());
+        container.add(headerWithTitle,BorderLayout.NORTH);
+        container.add(retraitForm,BorderLayout.CENTER);
     }
-    public RetraitOpDialog(Compte compte){
-        this.compte = compte;
+    public RetraitOpDialog(IServiceClient serviceClient){
+        this.serviceClient = serviceClient ;
         initContainer();
         setResizable(false);
         setSize(500,300);
